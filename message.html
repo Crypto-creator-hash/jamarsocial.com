@@ -1,0 +1,281 @@
+<html><head><base href="index.html">
+<title>Jamar Social - Messages</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+header {
+    background-color: #1877f2;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav {
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 15px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #1877f2;
+    font-weight: 600;
+}
+.messages-container {
+    display: flex;
+    height: calc(100vh - 100px);
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+.conversation-list {
+    width: 300px;
+    border-right: 1px solid #e4e6eb;
+    overflow-y: auto;
+}
+.conversation {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.conversation:hover, .conversation.active {
+    background-color: #f0f2f5;
+}
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.conversation-info {
+    flex-grow: 1;
+}
+.conversation-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.last-message {
+    color: #65676b;
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-window {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.chat-header {
+    padding: 15px;
+    border-bottom: 1px solid #e4e6eb;
+    display: flex;
+    align-items: center;
+}
+.chat-header .avatar {
+    margin-right: 15px;
+}
+.chat-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+.message {
+    max-width: 70%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 18px;
+    line-height: 1.4;
+}
+.message.sent {
+    background-color: #0084ff;
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+}
+.message.received {
+    background-color: #e4e6eb;
+    color: #050505;
+    align-self: flex-start;
+}
+.message-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #e4e6eb;
+}
+.message-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+}
+.send-button {
+    background-color: #0084ff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.send-button:hover {
+    background-color: #0073e6;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Jamar Social</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profiles.html">Profile</a></li>
+            <li><a href="friend.html">Friends</a></li>
+            <li><a href="message.html">Messages</a></li>
+            <li><a href="shop.html">Marketplace</a></li>
+			<li><a href="newsfeed.html">Newsfeed</a></li>
+        </ul>
+    </nav>
+    <div class="messages-container">
+        <div class="conversation-list" id="conversation-list">
+            <!-- Conversations will be dynamically added here -->
+        </div>
+        <div class="chat-window">
+            <div class="chat-header">
+                <img src="https://picsum.photos/50/50?random=1" alt="Sarah Lee" class="avatar">
+                <h2>Sarah Lee</h2>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be dynamically added here -->
+            </div>
+            <div class="message-input">
+                <input type="text" id="message-input" placeholder="Type a message...">
+                <button class="send-button" id="send-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const conversations = [
+        { id: 1, name: "Sarah Lee", avatar: "https://picsum.photos/50/50?random=1", lastMessage: "Hey, how's it going?", timestamp: "2 min ago" },
+        { id: 2, name: "Kamsi Obi", avatar: "https://picsum.photos/50/50?random=2", lastMessage: "Boss thank you ", timestamp: "1 hour ago" },
+        { id: 3, name: "Emma Watson", avatar: "https://picsum.photos/50/50?random=3", lastMessage: "Let's meet up this weekend!", timestamp: "3 hours ago" },
+        { id: 4, name: "Divine Fish", avatar: "https://picsum.photos/50/50?random=4", lastMessage: "Thanks for your help!", timestamp: "Yesterday" },
+        { id: 5, name: "Lisa Kim", avatar: "https://picsum.photos/50/50?random=5", lastMessage: "Are you coming to the party?", timestamp: "2 days ago" }
+    ];
+
+    const messages = [
+        { id: 1, senderId: 1, text: "Hey, how's it going?", timestamp: "2:30 PM" },
+        { id: 2, senderId: 0, text: "Hi Sarah! I'm doing well, thanks for asking. How about you?", timestamp: "2:32 PM" },
+        { id: 3, senderId: 1, text: "I'm great! Just wanted to check in and see if you're free this weekend.", timestamp: "2:33 PM" },
+        { id: 4, senderId: 0, text: "Yes, I should be free. Did you have something in mind?", timestamp: "2:35 PM" },
+        { id: 5, senderId: 1, text: "I was thinking we could grab coffee and catch up. It's been a while!", timestamp: "2:36 PM" },
+        { id: 6, senderId: 0, text: "That sounds perfect! How about Saturday afternoon?", timestamp: "2:38 PM" },
+        { id: 7, senderId: 1, text: "Saturday works for me. Let's say 2 PM at our usual spot?", timestamp: "2:40 PM" },
+        { id: 8, senderId: 0, text: "Sounds great! Looking forward to it.", timestamp: "2:41 PM" },
+        { id: 9, senderId: 1, text: "Awesome! See you then!", timestamp: "2:42 PM" }
+    ];
+
+    function createConversationElement(conversation) {
+        return `
+            <div class="conversation" data-id="${conversation.id}">
+                <img src="${conversation.avatar}" alt="${conversation.name}" class="avatar">
+                <div class="conversation-info">
+                    <div class="conversation-name">${conversation.name}</div>
+                    <div class="last-message">${conversation.lastMessage}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function displayConversations() {
+        const conversationList = document.getElementById('conversation-list');
+        conversationList.innerHTML = conversations.map(createConversationElement).join('');
+    }
+
+    function createMessageElement(message) {
+        const messageClass = message.senderId === 0 ? 'sent' : 'received';
+        return `
+            <div class="message ${messageClass}">
+                <div class="message-content">${message.text}</div>
+                <div class="message-timestamp">${message.timestamp}</div>
+            </div>
+        `;
+    }
+
+    function displayMessages() {
+        const chatMessages = document.getElementById('chat-messages');
+        chatMessages.innerHTML = messages.map(createMessageElement).join('');
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('message-input');
+        const message = input.value.trim();
+        if (message) {
+            const newMessage = {
+                id: messages.length + 1,
+                senderId: 0,
+                text: message,
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+            messages.push(newMessage);
+            displayMessages();
+            input.value = '';
+        }
+    }
+
+    displayConversations();
+    displayMessages();
+
+    // Event Listeners
+    document.getElementById('send-button').addEventListener('click', sendMessage);
+    document.getElementById('message-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    document.getElementById('conversation-list').addEventListener('click', function(e) {
+        const conversation = e.target.closest('.conversation');
+        if (conversation) {
+            document.querySelectorAll('.conversation').forEach(el => el.classList.remove('active'));
+            conversation.classList.add('active');
+            // In a real app, you would load the messages for the selected conversation here
+        }
+    });
+    </script>
+</body></html>

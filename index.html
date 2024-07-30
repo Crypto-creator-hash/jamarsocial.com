@@ -1,0 +1,284 @@
+<html><head><base href="index.html">
+<title>Jamar Social - Home</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+header {
+    background-color: #1877f2;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav {
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 15px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #1877f2;
+    font-weight: 600;
+}
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.post-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+}
+.post-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+    resize: none;
+}
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.post-button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.post {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.post-user {
+    font-weight: 600;
+}
+.post-timestamp {
+    color: #65676b;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+.post-content {
+    margin-bottom: 10px;
+}
+.post-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e4e6eb;
+    padding-top: 10px;
+}
+.post-action {
+    display: flex;
+    align-items: center;
+    color: #65676b;
+    cursor: pointer;
+}
+.post-action:hover {
+    text-decoration: underline;
+}
+.trending-topics {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+}
+.trending-topics h3 {
+    margin-top: 0;
+}
+.trending-topic {
+    margin-bottom: 10px;
+}
+.trending-topic a {
+    color: #1877f2;
+    text-decoration: none;
+}
+.trending-topic a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Jamar Social</h1>
+    </header>
+    <nav>
+        <ul>
+             <li><a href="index.html">Home</a></li>
+            <li><a href="profiles.html">Profile</a></li>
+            <li><a href="friend.html">Friends</a></li>
+            <li><a href="message.html">Messages</a></li>
+            <li><a href="shop.html">Marketplace</a></li>
+			<li><a href="newsfeed.html">Newsfeed</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="post-form">
+            <textarea class="post-input" placeholder="What's on your mind?"></textarea>
+            <div class="post-actions">
+                <button class="post-button">Post</button>
+            </div>
+        </div>
+        <div id="posts-container">
+            <!-- Posts will be dynamically added here -->
+        </div>
+        <div class="trending-topics">
+            <h3>Trending Topics</h3>
+            <div class="trending-topic">
+                <a href="#">#ceojames</a>
+            </div>
+            <div class="trending-topic">
+                <a href="#">#TechInnovation</a>
+            </div>
+            <div class="trending-topic">
+                <a href="#">#Jamar</a>
+            </div>
+            <div class="trending-topic">
+                <a href="#">#GlobalNews</a>
+            </div>
+            <div class="trending-topic">
+                <a href="#">#CeoMarvis</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    const posts = [
+        {
+            user: "Sarah Johnson",
+            avatar: "https://picsum.photos/40/40?random=1",
+            content: "Marvis Best CEO ever he is very smart?",
+            timestamp: "2 hours ago",
+            likes: 15,
+            comments: 7
+        },
+        {
+            user: "Mike Chen",
+            avatar: "https://picsum.photos/40/40?random=2",
+            content: "Check out this amazing sunset I captured yesterday!",
+            image: "https://picsum.photos/600/400?random=10",
+            timestamp: "5 hours ago",
+            likes: 42,
+            comments: 12
+        },
+        {
+            user: "Emily Davis",
+            avatar: "https://picsum.photos/40/40?random=3",
+            content: "Just adopted this cute little guy from the shelter. Meet Max!",
+            image: "https://picsum.photos/600/400?random=11",
+            timestamp: "1 day ago",
+            likes: 89,
+            comments: 23
+        },
+        {
+            user: "Alex Thompson",
+            avatar: "https://picsum.photos/40/40?random=4",
+            content: "Excited to announce that I've started a new job at Jamar-x! Looking forward to this new chapter.",
+            timestamp: "2 days ago",
+            likes: 112,
+            comments: 45
+        }
+    ];
+
+    function createPostElement(post) {
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+        postElement.innerHTML = `
+            <div class="post-header">
+                <img src="${post.avatar}" alt="${post.user}" class="post-avatar">
+                <span class="post-user">${post.user}</span>
+                <span class="post-timestamp">${post.timestamp}</span>
+            </div>
+            <div class="post-content">${post.content}</div>
+            ${post.image ? `<img src="${post.image}" alt="Post image" class="post-image">` : ''}
+            <div class="post-actions">
+                <div class="post-action">
+                    <span>👍 Like (${post.likes})</span>
+                </div>
+                <div class="post-action">
+                    <span>💬 Comment (${post.comments})</span>
+                </div>
+                <div class="post-action">
+                    <span>📤 Share</span>
+                </div>
+            </div>
+        `;
+        return postElement;
+    }
+
+    function displayPosts() {
+        const postsContainer = document.getElementById('posts-container');
+        posts.forEach(post => {
+            postsContainer.appendChild(createPostElement(post));
+        });
+    }
+
+    displayPosts();
+
+    // Add functionality to post button
+    const postButton = document.querySelector('.post-button');
+    const postInput = document.querySelector('.post-input');
+
+    postButton.addEventListener('click', function() {
+        const content = postInput.value.trim();
+        if (content) {
+            const newPost = {
+                user: "You",
+                avatar: "https://picsum.photos/40/40?random=99",
+                content: content,
+                timestamp: "Just now",
+                likes: 500,
+                comments: 80
+            };
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.insertBefore(createPostElement(newPost), postsContainer.firstChild);
+            postInput.value = '';
+        }
+    });
+    </script>
+</body></html>

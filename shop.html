@@ -1,0 +1,353 @@
+<html><head><base href="index.html">
+<title>Jamar Social - Marketplace</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+header {
+    background-color: #1877f2;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav {
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 15px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #1877f2;
+    font-weight: 600;
+}
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.marketplace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.search-bar {
+    flex-grow: 1;
+    margin-right: 20px;
+}
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+}
+.category-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+}
+.create-listing-btn {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.create-listing-btn:hover {
+    background-color: #166fe5;
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.product-info {
+    padding: 15px;
+}
+.product-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.product-price {
+    color: #1877f2;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.product-location {
+    color: #65676b;
+    font-size: 14px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-form label {
+    display: block;
+    margin-top: 10px;
+}
+.modal-form input[type="text"],
+.modal-form input[type="number"],
+.modal-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.modal-form button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+.modal-form button:hover {
+    background-color: #166fe5;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Jamar Social</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profiles.html">Profile</a></li>
+            <li><a href="friend.html">Friends</a></li>
+            <li><a href="message.html">Messages</a></li>
+            <li><a href="shop.html">Marketplace</a></li>
+			<li><a href="newsfeed.html">Newsfeed</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="marketplace-header">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search marketplace...">
+            </div>
+            <select class="category-select">
+                <option value="">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="furniture">Furniture</option>
+                <option value="clothing">Clothing</option>
+                <option value="vehicles">Vehicles</option>
+                <option value="books">Books</option>
+            </select>
+            <button class="create-listing-btn" id="create-listing-btn">Create New Listing</button>
+        </div>
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be dynamically added here -->
+        </div>
+    </main>
+
+    <!-- Modal for creating new listing -->
+    <div id="create-listing-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create New Listing</h2>
+            <form class="modal-form" id="create-listing-form">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" min="0" step="0.01" required>
+
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="vehicles">Vehicles</option>
+                    <option value="books">Books</option>
+                </select>
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <button type="submit">Create Listing</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    const products = [
+        { id: 1, title: "iPhone 12", price: 699.99, location: "New York, NY", image: "https://picsum.photos/300/200?random=1" },
+        { id: 2, title: "Leather Sofa", price: 499.99, location: "Los Angeles, CA", image: "https://picsum.photos/300/200?random=2" },
+        { id: 3, title: "Mountain Bike", price: 299.99, location: "Denver, CO", image: "https://picsum.photos/300/200?random=3" },
+        { id: 4, title: "Vintage Guitar", price: 799.99, location: "Nashville, TN", image: "https://picsum.photos/300/200?random=4" },
+        { id: 5, title: "MacBook Pro", price: 1299.99, location: "San Francisco, CA", image: "https://picsum.photos/300/200?random=5" },
+        { id: 6, title: "Dining Table Set", price: 349.99, location: "Chicago, IL", image: "https://picsum.photos/300/200?random=6" },
+        { id: 7, title: "Canon DSLR Camera", price: 599.99, location: "Seattle, WA", image: "https://picsum.photos/300/200?random=7" },
+        { id: 8, title: "Acoustic Guitar", price: 199.99, location: "Austin, TX", image: "https://picsum.photos/300/200?random=8" }
+    ];
+
+    function createProductCard(product) {
+        return `
+            <div class="product-card">
+                <img src="${product.image}" alt="${product.title}" class="product-image">
+                <div class="product-info">
+                    <div class="product-title">${product.title}</div>
+                    <div class="product-price">$${product.price.toFixed(2)}</div>
+                    <div class="product-location">${product.location}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function displayProducts() {
+        const productGrid = document.getElementById('product-grid');
+        productGrid.innerHTML = products.map(createProductCard).join('');
+    }
+
+    displayProducts();
+
+    // Modal functionality
+    const modal = document.getElementById("create-listing-modal");
+    const btn = document.getElementById("create-listing-btn");
+    const span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Form submission
+    document.getElementById("create-listing-form").onsubmit = function(e) {
+        e.preventDefault();
+        const title = document.getElementById("title").value;
+        const price = parseFloat(document.getElementById("price").value);
+        const location = document.getElementById("location").value;
+        const category = document.getElementById("category").value;
+        const description = document.getElementById("description").value;
+
+        // In a real app, you would send this data to a server
+        console.log("New listing:", { title, price, location, category, description });
+
+        // Add the new listing to the products array
+        const newProduct = {
+            id: products.length + 1,
+            title: title,
+            price: price,
+            location: location,
+            image: `https://picsum.photos/300/200?random=${products.length + 1}`
+        };
+        products.unshift(newProduct);
+
+        // Refresh the product display
+        displayProducts();
+
+        // Close the modal
+        modal.style.display = "none";
+
+        // Reset the form
+        e.target.reset();
+    };
+
+    // Search functionality
+    document.querySelector('.search-input').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredProducts = products.filter(product => 
+            product.title.toLowerCase().includes(searchTerm) ||
+            product.location.toLowerCase().includes(searchTerm)
+        );
+        const productGrid = document.getElementById('product-grid');
+        productGrid.innerHTML = filteredProducts.map(createProductCard).join('');
+    });
+
+    // Category filter
+    document.querySelector('.category-select').addEventListener('change', function(e) {
+        const category = e.target.value.toLowerCase();
+        const filteredProducts = category ? products.filter(product => product.category === category) : products;
+        const productGrid = document.getElementById('product-grid');
+        productGrid.innerHTML = filteredProducts.map(createProductCard).join('');
+    });
+    </script>
+</body></html>

@@ -1,0 +1,354 @@
+<html><head><base href="index.html">
+<title>Jamar Social - Newsfeed</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+header {
+    background-color: #1877f2;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav {
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 15px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #1877f2;
+    font-weight: 600;
+}
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+.post-form {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.post-input {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.post-button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.post-button:hover {
+    background-color: #166fe5;
+}
+.post {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.post-user {
+    font-weight: bold;
+}
+.post-timestamp {
+    color: #65676b;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+.post-content {
+    margin-bottom: 15px;
+}
+.post-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e4e6eb;
+    padding-top: 10px;
+}
+.action-button {
+    background: none;
+    border: none;
+    color: #65676b;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.action-button:hover {
+    background-color: #f0f2f5;
+    border-radius: 4px;
+}
+.action-icon {
+    margin-right: 5px;
+}
+.comments-section {
+    margin-top: 15px;
+    border-top: 1px solid #e4e6eb;
+    padding-top: 15px;
+}
+.comment {
+    display: flex;
+    margin-bottom: 10px;
+}
+.comment-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.comment-content {
+    background-color: #f0f2f5;
+    border-radius: 18px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+.comment-user {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.comment-form {
+    display: flex;
+    margin-top: 10px;
+}
+.comment-input {
+    flex-grow: 1;
+    border: none;
+    background-color: #f0f2f5;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+.comment-submit {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.comment-submit:hover {
+    background-color: #166fe5;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Jamar Social</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profiles.html">Profile</a></li>
+            <li><a href="friend.html">Friends</a></li>
+            <li><a href="message.html">Messages</a></li>
+            <li><a href="shop.html">Marketplace</a></li>
+			<li><a href="newsfeed.html">Newsfeed</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="post-form">
+            <textarea class="post-input" placeholder="What's on your mind?"></textarea>
+            <button class="post-button">Post</button>
+        </div>
+        <div id="newsfeed">
+            <!-- Posts will be dynamically added here -->
+        </div>
+    </main>
+
+    <script>
+    const posts = [
+        {
+            id: 1,
+            user: "Sarah Lee",
+            avatar: "https://picsum.photos/id/1027/40/40",
+            content: "Just finished a great workout at the gym! 💪 Feeling energized and ready to tackle the day. Who else is on their fitness journey?",
+            image: "https://picsum.photos/id/325/600/400",
+            timestamp: "2 hours ago",
+            likes: 15,
+            comments: [
+                { user: "Mike Chen", avatar: "https://picsum.photos/id/1012/32/32", content: "Way to go, Sarah! Keep up the great work!" },
+                { user: "Emma Watson", avatar: "https://picsum.photos/id/1014/32/32", content: "You're inspiring me to hit the gym too!" }
+            ]
+        },
+        {
+            id: 2,
+            user: "John Doe",
+            avatar: "https://picsum.photos/id/1025/40/40",
+            content: "Just adopted this little guy from the shelter. Meet Max! 🐶",
+            image: "https://picsum.photos/id/237/600/400",
+            timestamp: "5 hours ago",
+            likes: 42,
+            comments: [
+                { user: "Lisa Kim", avatar: "https://picsum.photos/id/1011/32/32", content: "He's adorable! Congrats on your new family member!" },
+                { user: "Tom Wilson", avatar: "https://picsum.photos/id/1005/32/32", content: "What a cutie! Rescue dogs are the best." }
+            ]
+        },
+        {
+            id: 3,
+            user: "Emily Johnson",
+            avatar: "https://picsum.photos/id/1024/40/40",
+            content: "Just tried this amazing new recipe for vegan lasagna. It's a game-changer! Who wants the recipe? 🍝🌱",
+            timestamp: "Yesterday",
+            likes: 28,
+            comments: [
+                { user: "Alex Brown", avatar: "https://picsum.photos/id/1006/32/32", content: "Ooh, I'd love to try it! Please share the recipe!" },
+                { user: "Sophia Garcia", avatar: "https://picsum.photos/id/1008/32/32", content: "Looks delicious! I'm always looking for new vegan recipes." }
+            ]
+        }
+    ];
+
+    function createPostElement(post) {
+        const commentsHtml = post.comments.map(comment => `
+            <div class="comment">
+                <img src="${comment.avatar}" alt="${comment.user}" class="comment-avatar">
+                <div class="comment-content">
+                    <span class="comment-user">${comment.user}</span>
+                    ${comment.content}
+                </div>
+            </div>
+        `).join('');
+
+        return `
+            <div class="post" data-post-id="${post.id}">
+                <div class="post-header">
+                    <img src="${post.avatar}" alt="${post.user}" class="post-avatar">
+                    <span class="post-user">${post.user}</span>
+                    <span class="post-timestamp">${post.timestamp}</span>
+                </div>
+                <div class="post-content">${post.content}</div>
+                ${post.image ? `<img src="${post.image}" alt="Post image" class="post-image">` : ''}
+                <div class="post-actions">
+                    <button class="action-button like-button">
+                        <span class="action-icon">👍</span> Like (${post.likes})
+                    </button>
+                    <button class="action-button comment-button">
+                        <span class="action-icon">💬</span> Comment
+                    </button>
+                    <button class="action-button share-button">
+                        <span class="action-icon">📤</span> Share
+                    </button>
+                </div>
+                <div class="comments-section">
+                    ${commentsHtml}
+                    <form class="comment-form">
+                        <input type="text" class="comment-input" placeholder="Write a comment...">
+                        <button type="submit" class="comment-submit">Post</button>
+                    </form>
+                </div>
+            </div>
+        `;
+    }
+
+    function displayPosts() {
+        const newsfeed = document.getElementById('newsfeed');
+        newsfeed.innerHTML = posts.map(createPostElement).join('');
+    }
+
+    displayPosts();
+
+    // Event delegation for like buttons
+    document.getElementById('newsfeed').addEventListener('click', function(e) {
+        if (e.target.closest('.like-button')) {
+            const postElement = e.target.closest('.post');
+            const postId = parseInt(postElement.dataset.postId);
+            const post = posts.find(p => p.id === postId);
+            if (post) {
+                post.likes++;
+                postElement.querySelector('.like-button').innerHTML = `<span class="action-icon">👍</span> Like (${post.likes})`;
+            }
+        }
+    });
+
+    // Event delegation for comment forms
+    document.getElementById('newsfeed').addEventListener('submit', function(e) {
+        if (e.target.classList.contains('comment-form')) {
+            e.preventDefault();
+            const postElement = e.target.closest('.post');
+            const postId = parseInt(postElement.dataset.postId);
+            const post = posts.find(p => p.id === postId);
+            const commentInput = e.target.querySelector('.comment-input');
+            const commentContent = commentInput.value.trim();
+            if (post && commentContent) {
+                post.comments.push({
+                    user: "You",
+                    avatar: "https://picsum.photos/id/1018/32/32", // Replace with actual user avatar
+                    content: commentContent
+                });
+                displayPosts(); // Refresh all posts to show the new comment
+                commentInput.value = ''; // Clear the input
+            }
+        }
+    });
+
+    // New post functionality
+    document.querySelector('.post-button').addEventListener('click', function() {
+        const postInput = document.querySelector('.post-input');
+        const content = postInput.value.trim();
+        if (content) {
+            const newPost = {
+                id: posts.length + 1,
+                user: "You",
+                avatar: "https://picsum.photos/id/1018/40/40", // Replace with actual user avatar
+                content: content,
+                timestamp: "Just now",
+                likes: 0,
+                comments: []
+            };
+            posts.unshift(newPost);
+            displayPosts();
+            postInput.value = '';
+        }
+    });
+    </script>
+</body></html>

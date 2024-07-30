@@ -1,0 +1,290 @@
+<html><head><base href="index.html">
+<title>Jamar Social - Friends</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+header {
+    background-color: #1877f2;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav {
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 15px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #1877f2;
+    font-weight: 600;
+}
+main {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.search-bar {
+    margin-bottom: 20px;
+}
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+}
+.friends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+.friend-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+.friend-card:hover {
+    transform: translateY(-5px);
+}
+.friend-photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.friend-info {
+    padding: 15px;
+}
+.friend-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.friend-meta {
+    color: #65676b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.friend-actions {
+    display: flex;
+    justify-content: space-between;
+}
+.action-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.message-btn {
+    background-color: #e4e6eb;
+    color: #050505;
+}
+.message-btn:hover {
+    background-color: #d8dadf;
+}
+.unfriend-btn {
+    background-color: #1877f2;
+    color: white;
+}
+.unfriend-btn:hover {
+    background-color: #166fe5;
+}
+.friend-requests {
+    margin-top: 40px;
+}
+.request-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.request-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+.request-info {
+    flex-grow: 1;
+}
+.request-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.request-meta {
+    color: #65676b;
+    font-size: 14px;
+}
+.request-actions {
+    display: flex;
+    gap: 10px;
+}
+.accept-btn {
+    background-color: #42b72a;
+    color: white;
+}
+.accept-btn:hover {
+    background-color: #36a420;
+}
+.decline-btn {
+    background-color: #e4e6eb;
+    color: #050505;
+}
+.decline-btn:hover {
+    background-color: #d8dadf;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Jamar Social</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profiles.html">Profile</a></li>
+            <li><a href="friend.html">Friends</a></li>
+            <li><a href="message.html">Messages</a></li>
+            <li><a href="shop.html">Marketplace</a></li>
+			<li><a href="newsfeed.html">Newsfeed</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search friends...">
+        </div>
+        <h2>Your Friends</h2>
+        <div class="friends-grid" id="friends-container">
+            <!-- Friends will be dynamically added here -->
+        </div>
+        <div class="friend-requests">
+            <h2>Friend Requests</h2>
+            <div id="requests-container">
+                <!-- Friend requests will be dynamically added here -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+    const friends = [
+        { name: "Sarah Lee", photo: "https://picsum.photos/200/200?random=1", mutualFriends: 15 },
+        { name: "Mike Chen", photo: "https://picsum.photos/200/200?random=2", mutualFriends: 8 },
+        { name: "Emma Watson", photo: "https://picsum.photos/200/200?random=3", mutualFriends: 23 },
+        { name: "John Doe", photo: "https://picsum.photos/200/200?random=4", mutualFriends: 5 },
+        { name: "Lisa Kim", photo: "https://picsum.photos/200/200?random=5", mutualFriends: 12 },
+        { name: "Tom Brown", photo: "https://picsum.photos/200/200?random=6", mutualFriends: 19 },
+        { name: "Alex Johnson", photo: "https://picsum.photos/200/200?random=7", mutualFriends: 7 },
+        { name: "Emily Davis", photo: "https://picsum.photos/200/200?random=8", mutualFriends: 31 }
+    ];
+
+    const friendRequests = [
+        { name: "David Wilson", photo: "https://picsum.photos/200/200?random=9", mutualFriends: 3 },
+        { name: "Sophia Martinez", photo: "https://picsum.photos/200/200?random=10", mutualFriends: 7 }
+    ];
+
+    function createFriendCard(friend) {
+        return `
+            <div class="friend-card">
+                <img src="${friend.photo}" alt="${friend.name}" class="friend-photo">
+                <div class="friend-info">
+                    <div class="friend-name">${friend.name}</div>
+                    <div class="friend-meta">${friend.mutualFriends} mutual friends</div>
+                    <div class="friend-actions">
+                        <button class="action-button message-btn">Message</button>
+                        <button class="action-button unfriend-btn">Unfriend</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function createRequestCard(request) {
+        return `
+            <div class="request-card">
+                <img src="${request.photo}" alt="${request.name}" class="request-photo">
+                <div class="request-info">
+                    <div class="request-name">${request.name}</div>
+                    <div class="request-meta">${request.mutualFriends} mutual friends</div>
+                </div>
+                <div class="request-actions">
+                    <button class="action-button accept-btn">Accept</button>
+                    <button class="action-button decline-btn">Decline</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function displayFriends() {
+        const friendsContainer = document.getElementById('friends-container');
+        friendsContainer.innerHTML = friends.map(createFriendCard).join('');
+    }
+
+    function displayFriendRequests() {
+        const requestsContainer = document.getElementById('requests-container');
+        requestsContainer.innerHTML = friendRequests.map(createRequestCard).join('');
+    }
+
+    displayFriends();
+    displayFriendRequests();
+
+    // Search functionality
+    const searchInput = document.querySelector('.search-input');
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const filteredFriends = friends.filter(friend => 
+            friend.name.toLowerCase().includes(searchTerm)
+        );
+        const friendsContainer = document.getElementById('friends-container');
+        friendsContainer.innerHTML = filteredFriends.map(createFriendCard).join('');
+    });
+
+    // Event delegation for button clicks
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('message-btn')) {
+            alert('Messaging feature coming soon!');
+        } else if (e.target.classList.contains('unfriend-btn')) {
+            if (confirm('Are you sure you want to unfriend this person?')) {
+                e.target.closest('.friend-card').remove();
+            }
+        } else if (e.target.classList.contains('accept-btn')) {
+            alert('Friend request accepted!');
+            e.target.closest('.request-card').remove();
+        } else if (e.target.classList.contains('decline-btn')) {
+            if (confirm('Are you sure you want to decline this friend request?')) {
+                e.target.closest('.request-card').remove();
+            }
+        }
+    });
+    </script>
+</body></html>
